@@ -1,0 +1,5 @@
+generated/
+*.pbix~
+*.tmp
+.DS_Store
+Thumbs.db
