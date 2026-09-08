@@ -1,0 +1,7 @@
+CREATE TABLE DimDate ([Date] date PRIMARY KEY,[Year] int,Quarter varchar(2),MonthNumber int,Month varchar(3),YearMonth char(7),Weekday varchar(10),IsWeekend bit);
+CREATE TABLE DimGeography (GeographyID varchar(10) PRIMARY KEY,Region varchar(50),Country varchar(100),Currency varchar(10),FX_to_INR decimal(18,4));
+CREATE TABLE DimProduct (ProductID varchar(10) PRIMARY KEY,ProductCategory varchar(100),Product varchar(150),BaseUnitPriceINR decimal(18,2),BaseUnitCostINR decimal(18,2));
+CREATE TABLE DimChannel (ChannelID varchar(10) PRIMARY KEY,Channel varchar(50),PriceMultiplier decimal(10,4),TypicalDiscount decimal(10,4));
+CREATE TABLE DimSalesperson (SalespersonID varchar(10) PRIMARY KEY,Salesperson varchar(100),PrimaryRegion varchar(50),Manager varchar(100));
+CREATE TABLE DimCustomer (CustomerID varchar(20) PRIMARY KEY,CustomerName varchar(150),CustomerSegment varchar(50),GeographyID varchar(10),Country varchar(100),Region varchar(50));
+CREATE TABLE FactSales (OrderID varchar(30) PRIMARY KEY,OrderDate date,CustomerID varchar(20),GeographyID varchar(10),ProductID varchar(10),ChannelID varchar(10),SalespersonID varchar(10),Units int,UnitPriceINR decimal(18,2),DiscountPct decimal(10,4),RevenueINR decimal(18,2),CostINR decimal(18,2),GrossProfitINR decimal(18,2),TargetRevenueINR decimal(18,2),Region varchar(50),Country varchar(100),ProductCategory varchar(100),CustomerSegment varchar(50),Channel varchar(50));
