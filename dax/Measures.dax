@@ -1,0 +1,59 @@
+Total Revenue = SUM(FactSales[RevenueINR])
+
+Gross Profit = SUM(FactSales[GrossProfitINR])
+
+Total Cost = SUM(FactSales[CostINR])
+
+Gross Margin % = DIVIDE([Gross Profit], [Total Revenue])
+
+Units Sold = SUM(FactSales[Units])
+
+Orders = DISTINCTCOUNT(FactSales[OrderID])
+
+Average Order Value = DIVIDE([Total Revenue], [Orders])
+
+Target Revenue = SUM(FactSales[TargetRevenueINR])
+
+Revenue Variance = [Total Revenue] - [Target Revenue]
+
+Target Attainment % = DIVIDE([Total Revenue], [Target Revenue])
+
+Revenue PY =
+CALCULATE(
+    [Total Revenue],
+    SAMEPERIODLASTYEAR(DimDate[Date])
+)
+
+YoY Growth % =
+DIVIDE([Total Revenue] - [Revenue PY], [Revenue PY])
+
+Regional Contribution % =
+DIVIDE(
+    [Total Revenue],
+    CALCULATE([Total Revenue], ALL(DimGeography[Region]))
+)
+
+Average Discount % = AVERAGE(FactSales[DiscountPct])
+
+Revenue per Customer =
+DIVIDE([Total Revenue], DISTINCTCOUNT(FactSales[CustomerID]))
+
+Salesperson Rank =
+RANKX(
+    ALL(DimSalesperson[Salesperson]),
+    [Total Revenue],
+    ,
+    DESC,
+    DENSE
+)
+
+Margin Status =
+SWITCH(
+    TRUE(),
+    [Gross Margin %] < 0.20, "Critical",
+    [Gross Margin %] < 0.30, "Watch",
+    "Healthy"
+)
+
+Target Status =
+IF([Target Attainment %] >= 1, "On / Above Target", "Below Target")
