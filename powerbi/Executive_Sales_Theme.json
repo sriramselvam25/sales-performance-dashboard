@@ -1,0 +1,7 @@
+{
+  "name": "Executive Sales Analytics",
+  "dataColors": ["#1D4ED8", "#0F766E", "#334155", "#64748B", "#94A3B8", "#0369A1", "#047857", "#7C3AED"],
+  "background": "#FFFFFF",
+  "foreground": "#0F172A",
+  "tableAccent": "#1D4ED8"
+}
